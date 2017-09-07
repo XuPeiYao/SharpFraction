@@ -5,12 +5,23 @@ using Xunit;
 namespace Test {
     public class UnitTest1 {
         [Fact]
-        public void Test1() {
-            var k = new Fraction(1, 3);
-            var k2 = new Fraction(3, 3, true);
-            var c = (double)(k + k2);
+        public void Add() {
+            var a = new Fraction(1, 3);
+            var b = new Fraction(2, 3);
+            Assert.Equal((double)(a + b), (double)new Fraction(1));
+        }
 
-            Assert.Equal((double)(k + k2), (double)new Fraction(-2, 3));
+        [Fact]
+        public void Sub() {
+            var a = new Fraction(1, 3);
+            var b = new Fraction(2, 3);
+            Assert.Equal((double)(a - b), (double)new Fraction(1, 3, true));
+        }
+
+        [Fact]
+        public void Div() {
+            var a = 1 / new Fraction(1, 3);
+            Assert.Equal(a, 3);
         }
     }
 }

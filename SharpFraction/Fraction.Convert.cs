@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SharpFraction {
     public partial struct Fraction {
@@ -14,11 +16,19 @@ namespace SharpFraction {
         public static explicit operator int(Fraction obj) {
             return (int)(double)obj;
         }
-        /*
-        public static Fraction FromDouble(double value) {
 
-        }*/
+        public static implicit operator Fraction(int obj) {
+            return new Fraction(obj);
+        }
 
-        public static Fraction FromInt(int value) => new Fraction(value);
+        public static Fraction Parse(string str) {
+            if (str.Contains("/")) {
+                var args = str.Split(new char[] { '/' }, 2)
+                    .Select(x => int.Parse(x)).ToArray();
+                return new Fraction(args[0], args[1]);
+            } else {
+                return new Fraction(int.Parse(str));
+            }
+        }
     }
 }
